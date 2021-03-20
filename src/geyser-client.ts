@@ -3,6 +3,8 @@ import { get } from 'extra-request'
 import { url, pathname, searchParams, signal, keepalive } from 'extra-request/lib/es2018/transformers'
 import { ok } from 'extra-response'
 
+export { HTTPClientError } from '@blackglory/http-status'
+
 export interface IGeyserClientOptions {
   server: string
   token?: string
