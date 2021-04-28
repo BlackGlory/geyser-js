@@ -13,7 +13,7 @@ interface ITokenPolicy {
 export class TokenPolicyClient {
   constructor(private options: IGeyserManagerOptions) {}
 
-  async getIds(options: IGeyserManagerRequestOptions = {}): Promise<string[]> {
+  async getNamespaces(options: IGeyserManagerRequestOptions = {}): Promise<string[]> {
     const req = get(
       url(this.options.server)
     , pathname('/admin/geyser-with-token-policies')
@@ -26,10 +26,13 @@ export class TokenPolicyClient {
       .then(toJSON) as string[]
   }
 
-  async get(id: string, options: IGeyserManagerRequestOptions = {}): Promise<ITokenPolicy> {
+  async get(
+    namespace: string
+  , options: IGeyserManagerRequestOptions = {}
+  ): Promise<ITokenPolicy> {
     const req = get(
       url(this.options.server)
-    , pathname(`/admin/geyser/${id}/token-policies`)
+    , pathname(`/admin/geyser/${namespace}/token-policies`)
     , password(this.options.adminPassword)
     , options.signal && signal(options.signal)
     )
@@ -39,10 +42,14 @@ export class TokenPolicyClient {
       .then(toJSON) as ITokenPolicy
   }
 
-  async setAcquireTokenRequired(id: string, val: boolean, options: IGeyserManagerRequestOptions = {}): Promise<void> {
+  async setAcquireTokenRequired(
+    namespace: string
+  , val: boolean
+  , options: IGeyserManagerRequestOptions = {}
+  ): Promise<void> {
     const req = put(
       url(this.options.server)
-    , pathname(`/admin/geyser/${id}/token-policies/acquire-token-required`)
+    , pathname(`/admin/geyser/${namespace}/token-policies/acquire-token-required`)
     , password(this.options.adminPassword)
     , json(val)
     , options.signal && signal(options.signal)
@@ -51,10 +58,13 @@ export class TokenPolicyClient {
     await fetch(req).then(ok)
   }
 
-  async removeAcquireTokenRequired(id: string, options: IGeyserManagerRequestOptions = {}): Promise<void> {
+  async removeAcquireTokenRequired(
+    namespace: string
+  , options: IGeyserManagerRequestOptions = {}
+  ): Promise<void> {
     const req = del(
       url(this.options.server)
-    , pathname(`/admin/geyser/${id}/token-policies/acquire-token-required`)
+    , pathname(`/admin/geyser/${namespace}/token-policies/acquire-token-required`)
     , password(this.options.adminPassword)
     , options.signal && signal(options.signal)
     )

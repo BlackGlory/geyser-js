@@ -8,21 +8,21 @@ beforeEach(() => server.resetHandlers())
 afterAll(() => server.close())
 
 describe('ConfigurationClient', () => {
-  it('getIds(): Promise<string[]>', async () => {
+  test('getNamespaces(): Promise<string[]>', async () => {
     const client = createClient()
 
-    const result = client.getIds()
+    const result = client.getNamespaces()
     const proResult = await result
 
     expect(result).toBePromise()
-    expect(proResult).toStrictEqual(['id'])
+    expect(proResult).toStrictEqual(['namespace'])
   })
 
-  it('get(id: string): Promise<Configuration>', async () => {
+  test('get(namespace: string): Promise<Configuration>', async () => {
     const client = createClient()
-    const id = 'id'
+    const namespace = 'namespace'
 
-    const result = client.get(id)
+    const result = client.get(namespace)
     const proResult = await result
 
     expect(result).toBePromise()
@@ -32,46 +32,46 @@ describe('ConfigurationClient', () => {
     })
   })
 
-  it('setDuration(id: string, val: number): Promise<void>', async () => {
+  test('setDuration(namespace: string, val: number): Promise<void>', async () => {
     const client = createClient()
-    const id = 'id'
+    const namespace = 'namespace'
     const val = 100
 
-    const result = client.setDuration(id, val)
+    const result = client.setDuration(namespace, val)
     const proResult = await result
 
     expect(result).toBePromise()
     expect(proResult).toBeUndefined()
   })
 
-  it('removeDuration(id: string): Promise<void>', async () => {
+  test('removeDuration(namespace: string): Promise<void>', async () => {
     const client = createClient()
-    const id = 'id'
+    const namespace = 'namespace'
 
-    const result = client.removeDuration(id)
+    const result = client.removeDuration(namespace)
     const proResult = await result
 
     expect(result).toBePromise()
     expect(proResult).toBeUndefined()
   })
 
-  it('setLimit(id: string, val: number): Promise<void>', async () => {
+  test('setLimit(namespace: string, val: number): Promise<void>', async () => {
     const client = createClient()
-    const id = 'id'
+    const namespace = 'namespace'
     const val = 100
 
-    const result = client.setLimit(id, val)
+    const result = client.setLimit(namespace, val)
     const proResult = await result
 
     expect(result).toBePromise()
     expect(proResult).toBeUndefined()
   })
 
-  it('removeLimit(id: string): Promise<void>', async () => {
+  test('removeLimit(namespace: string): Promise<void>', async () => {
     const client = createClient()
-    const id = 'id'
+    const namespace = 'namespace'
 
-    const result = client.removeLimit(id)
+    const result = client.removeLimit(namespace)
     const proResult = await result
 
     expect(result).toBePromise()

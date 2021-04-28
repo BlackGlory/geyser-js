@@ -21,14 +21,14 @@ export class GeyserClient {
   constructor(private options: IGeyserClientOptions) {}
 
   async acquire(
-    id: string
+    namespace: string
   , options: IGeyserClientRequestOptions = {}
   ): Promise<void> {
     const token = options.token ?? this.options.token
 
     const req = get(
       url(this.options.server)
-    , pathname(`geyser/${id}`)
+    , pathname(`geyser/${namespace}`)
     , token && searchParams({ token })
     , options.signal && signal(options.signal)
     , keepalive(options.keepalive ?? this.options.keepalive)

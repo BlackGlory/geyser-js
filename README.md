@@ -31,7 +31,7 @@ interface IGeyserClientRequestOptions {
 #### acquire
 
 ```ts
-GeyserClient#acquire(id: string, options?: IGeyserClientRequestOptions): Promise<void>
+GeyserClient#acquire(namespace: string, options?: IGeyserClientRequestOptions): Promise<void>
 ```
 
 ### GeyserManager
@@ -51,16 +51,21 @@ interface IGeyserManagerRequestOptions {
 
 #### Configuration
 
-##### getIds
+##### getNamespaces
 
 ```ts
-GeyserManager#Configuration.getIds(options?: IGeyserManagerRequestOptions): Promise<string[]>
+GeyserManager#Configuration.getNamespaces(
+  options?: IGeyserManagerRequestOptions
+): Promise<string[]>
 ```
 
 ##### get
 
 ```ts
-GeyserManager#Configuration.get(id: string, options?: IGeyserManagerRequestOptions): Promise<{
+GeyserManager#Configuration.get(
+  namespace: string
+, options?: IGeyserManagerRequestOptions
+): Promise<{
   duration: number | null
   limit: number | null
 }>
@@ -69,79 +74,114 @@ GeyserManager#Configuration.get(id: string, options?: IGeyserManagerRequestOptio
 ##### setDuration
 
 ```ts
-GeyserManager#Configuration.setDuration(id: string, val: number, options?: IGeyserManagerRequestOptions): Promise<void>
+GeyserManager#Configuration.setDuration(
+  namespace: string
+, val: number
+, options?: IGeyserManagerRequestOptions
+): Promise<void>
 ```
 
 ##### removeDuration
 
 ```ts
-GeyserManager#Configuration.removeDuration(id: string, options?: IGeyserManagerRequestOptions): Promise<void>
+GeyserManager#Configuration.removeDuration(
+  namespace: string
+, options?: IGeyserManagerRequestOptions
+): Promise<void>
 ```
 
 ##### setLimit
 
 ```ts
-GeyserManager#Configuration.setLimit(id: string, val: number, options?: IGeyserManagerRequestOptions): Promise<void>
+GeyserManager#Configuration.setLimit(
+  namespace: string
+, val: number
+, options?: IGeyserManagerRequestOptions
+): Promise<void>
 ```
 
 ##### removeLimit
 
 ```ts
-GeyserManager#Configuration.removeLimit(id: string, options?: IGeyserManagerRequestOptions): Promise<void>
+GeyserManager#Configuration.removeLimit(
+  namespace: string
+, options?: IGeyserManagerRequestOptions
+): Promise<void>
 ```
 
 #### Blacklist
 
-##### getIds
+##### getNamespaces
 
 ```ts
-GeyserManager#Blacklist.getIds(options?: IGeyserManagerRequestOptions): Promise<string[]>
+GeyserManager#Blacklist.getNamespaces(
+  options?: IGeyserManagerRequestOptions
+): Promise<string[]>
 ```
 
 ##### add
 
 ```ts
-GeyserManager#Blacklist.add(id: string, options?: IGeyserManagerRequestOptions): Promise<void>
+GeyserManager#Blacklist.add(
+  namespace: string
+, options?: IGeyserManagerRequestOptions
+): Promise<void>
 ```
 
 ##### remove
 
 ```ts
-GeyserManager#Blacklist.remove(id: string, options?: IGeyserManagerRequestOptions): Promise<void>
+GeyserManager#Blacklist.remove(
+  namespace: string
+, options?: IGeyserManagerRequestOptions
+): Promise<void>
 ```
 
 #### Whitelist
 
-##### getIds
+##### getNamespaces
 
 ```ts
-GeyserManager#Whitelist.getIds(options?: IGeyserManagerRequestOptions): Promise<string[]>
+GeyserManager#Whitelist.getNamespaces(
+  options?: IGeyserManagerRequestOptions
+): Promise<string[]>
 ```
 
 ##### add
 
 ```ts
-GeyserManager#Whitelist.add(id: string, options?: IGeyserManagerRequestOptions): Promise<void>
+GeyserManager#Whitelist.add(
+  namespace: string
+, options?: IGeyserManagerRequestOptions
+): Promise<void>
 ```
 
 ##### remove
 
 ```ts
-GeyserManager#Whitelist.remove(id: string, options?: IGeyserManagerRequestOptions): Promise<void>
+GeyserManager#Whitelist.remove(
+  namespace: string
+, options?: IGeyserManagerRequestOptions
+): Promise<void>
 ```
 
 #### TokenPolicy
 
-##### getIds
+##### getNamespaces
 
 ```ts
-GeyserManager#TokenPolicy.getIds(options?: IGeyserManagerRequestOptions): Promise<string[]>
+GeyserManager#TokenPolicy.getNamespaces(
+  options?: IGeyserManagerRequestOptions
+): Promise<string[]>
 ```
 
 ##### get
 
 ```ts
-GeyserManager#TokenPolicy.get(id: string, options?: IGeyserManagerRequestOptions): Promise<{
+GeyserManager#TokenPolicy.get(
+  namespace: string
+, options?: IGeyserManagerRequestOptions
+): Promise<{
   acquireTokenRequired: boolean | null
 }>
 ```
@@ -149,27 +189,39 @@ GeyserManager#TokenPolicy.get(id: string, options?: IGeyserManagerRequestOptions
 ##### setAcquireTokenRequired
 
 ```ts
-GeyserManager#TokenPolicy.setAcquireTokenRequired(id: string, val: boolean, options?: IGeyserManagerRequestOptions): Promise<void>
+GeyserManager#TokenPolicy.setAcquireTokenRequired(
+  namespace: string
+, val: boolean
+, options?: IGeyserManagerRequestOptions
+): Promise<void>
 ```
 
 ##### removeAcquireTokenRequired
 
 ```ts
-GeyserManager#TokenPolicy.removeAcquireTokenRequired(id: string, options?: IGeyserManagerRequestOptions): Promise<void>
+GeyserManager#TokenPolicy.removeAcquireTokenRequired(
+  namespace: string
+, options?: IGeyserManagerRequestOptions
+): Promise<void>
 ```
 
 #### Token
 
-##### getIds
+##### getNamespaces
 
 ```ts
-GeyserManager#Token.getIds(options?: IGeyserManagerRequestOptions): Promise<string[]>
+GeyserManager#Token.getNamespaces(
+  options?: IGeyserManagerRequestOptions
+): Promise<string[]>
 ```
 
 ##### getTokens
 
 ```ts
-GeyserManager#Token.getTokens(id: string, options?: IGeyserManagerRequestOptions): Promise<Array<{
+GeyserManager#Token.getTokens(
+  namespace: string
+, options?: IGeyserManagerRequestOptions
+): Promise<Array<{
   acquire: boolean
 }>>
 ```
@@ -177,11 +229,19 @@ GeyserManager#Token.getTokens(id: string, options?: IGeyserManagerRequestOptions
 ##### addAcquireToken
 
 ```ts
-GeyserManager#Token.addAcquireToken(id: string, token: string, options?: IGeyserManagerRequestOptions): Promise<void>
+GeyserManager#Token.addAcquireToken(
+  namespace: string
+, token: string
+, options?: IGeyserManagerRequestOptions
+): Promise<void>
 ```
 
 ##### removeAcquireToken
 
 ```ts
-GeyserManager#Token.removeAcquireToken(id: string, token: string, options?: IGeyserManagerRequestOptions): Promise<void>
+GeyserManager#Token.removeAcquireToken(
+  namespace: string
+, token: string
+, options?: IGeyserManagerRequestOptions
+): Promise<void>
 ```

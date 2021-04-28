@@ -14,7 +14,7 @@ interface ITokenInfo {
 export class TokenClient {
   constructor(private options: IGeyserManagerOptions) {}
 
-  async getIds(options: IGeyserManagerRequestOptions = {}): Promise<string[]> {
+  async getNamespaces(options: IGeyserManagerRequestOptions = {}): Promise<string[]> {
     const req = get(
       url(this.options.server)
     , pathname('/admin/geyser-with-tokens')
@@ -27,10 +27,13 @@ export class TokenClient {
       .then(toJSON) as string[]
   }
 
-  async getTokens(id: string, options: IGeyserManagerRequestOptions = {}): Promise<ITokenInfo[]> {
+  async getTokens(
+    namespace: string
+  , options: IGeyserManagerRequestOptions = {}
+  ): Promise<ITokenInfo[]> {
     const req = get(
       url(this.options.server)
-    , pathname(`/admin/geyser/${id}/tokens`)
+    , pathname(`/admin/geyser/${namespace}/tokens`)
     , password(this.options.adminPassword)
     , options.signal && signal(options.signal)
     )
@@ -40,10 +43,14 @@ export class TokenClient {
       .then(toJSON) as ITokenInfo[]
   }
 
-  async addAcquireToken(id: string, token: string, options: IGeyserManagerRequestOptions = {}): Promise<void> {
+  async addAcquireToken(
+    namespace: string
+  , token: string
+  , options: IGeyserManagerRequestOptions = {}
+  ): Promise<void> {
     const req = put(
       url(this.options.server)
-    , pathname(`/admin/geyser/${id}/tokens/${token}/acquire`)
+    , pathname(`/admin/geyser/${namespace}/tokens/${token}/acquire`)
     , password(this.options.adminPassword)
     , options.signal && signal(options.signal)
     )
@@ -51,10 +58,14 @@ export class TokenClient {
     await fetch(req).then(ok)
   }
 
-  async removeAcquireToken(id: string, token: string, options: IGeyserManagerRequestOptions = {}): Promise<void> {
+  async removeAcquireToken(
+    namespace: string
+  , token: string
+  , options: IGeyserManagerRequestOptions = {}
+  ): Promise<void> {
     const req = del(
       url(this.options.server)
-    , pathname(`/admin/geyser/${id}/tokens/${token}/acquire`)
+    , pathname(`/admin/geyser/${namespace}/tokens/${token}/acquire`)
     , password(this.options.adminPassword)
     , options.signal && signal(options.signal)
     )

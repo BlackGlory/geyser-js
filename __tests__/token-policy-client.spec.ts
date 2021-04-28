@@ -8,21 +8,25 @@ beforeEach(() => server.resetHandlers())
 afterAll(() => server.close())
 
 describe('TokenPolicyClient', () => {
-  it('getIds(): Promise<string[]>', async () => {
+  test('getNamespaces(): Promise<string[]>', async () => {
     const client = createClient()
 
-    const result = client.getIds()
+    const result = client.getNamespaces()
     const proResult = await result
 
     expect(result).toBePromise()
-    expect(proResult).toStrictEqual(['id'])
+    expect(proResult).toStrictEqual(['namespace'])
   })
 
-  it('get(id: string): Promise<{ acquireTokenRequired: boolean | null }>', async () => {
+  test(`
+    get(
+      namespace: string
+    ): Promise<{ acquireTokenRequired: boolean | null }>
+  `, async () => {
     const client = createClient()
-    const id = 'id'
+    const namespace = 'namespace'
 
-    const result = client.get(id)
+    const result = client.get(namespace)
     const proResult = await result
 
     expect(result).toBePromise()
@@ -31,23 +35,28 @@ describe('TokenPolicyClient', () => {
     })
   })
 
-  it('setAcquireTokenRequired(id: string, val: boolean): Promise<void>', async () => {
+  test(`
+    setAcquireTokenRequired(
+      namespace: string
+    , val: boolean
+    ): Promise<void>
+  `, async () => {
     const client = createClient()
-    const id = 'id'
+    const namespace = 'namespace'
     const val = true
 
-    const result = client.setAcquireTokenRequired(id, val)
+    const result = client.setAcquireTokenRequired(namespace, val)
     const proResult = await result
 
     expect(result).toBePromise()
     expect(proResult).toBeUndefined()
   })
 
-  it('removeAcquireTokenRequired(id: string): Promise<void>', async () => {
+  test('removeAcquireTokenRequired(namespace: string): Promise<void>', async () => {
     const client = createClient()
-    const id = 'id'
+    const namespace = 'namespace'
 
-    const result = client.removeAcquireTokenRequired(id)
+    const result = client.removeAcquireTokenRequired(namespace)
     const proResult = await result
 
     expect(result).toBePromise()

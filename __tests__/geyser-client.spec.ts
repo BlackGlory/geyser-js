@@ -8,11 +8,16 @@ beforeEach(() => server.resetHandlers())
 afterAll(() => server.close())
 
 describe('GeyserClient', () => {
-  it('acquire(id: string, options?: { signal?: string, token?: string }): Promise<string>', async () => {
+  test(`
+    acquire(
+      namespace: string
+    , options?: { signal?: string, token?: string }
+    ): Promise<string>
+  `, async () => {
     const client = createClient()
-    const id = 'id'
+    const namespace = 'namespace'
 
-    const result = client.acquire(id)
+    const result = client.acquire(namespace)
     const proResult = await result
 
     expect(result).toBePromise()

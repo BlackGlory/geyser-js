@@ -14,7 +14,7 @@ interface IConfiguration {
 export class ConfigurationClient {
   constructor(private options: IGeyserManagerOptions) {}
 
-  async getIds(options: IGeyserManagerRequestOptions = {}): Promise<string[]> {
+  async getNamespaces(options: IGeyserManagerRequestOptions = {}): Promise<string[]> {
     const req = get(
       url(this.options.server)
     , pathname('/admin/geyser-with-config')
@@ -27,10 +27,13 @@ export class ConfigurationClient {
       .then(toJSON) as string[]
   }
 
-  async get(id: string, options: IGeyserManagerRequestOptions = {}): Promise<IConfiguration> {
+  async get(
+    namespace: string
+  , options: IGeyserManagerRequestOptions = {}
+  ): Promise<IConfiguration> {
     const req = get(
       url(this.options.server)
-    , pathname(`/admin/geyser/${id}/config`)
+    , pathname(`/admin/geyser/${namespace}/config`)
     , password(this.options.adminPassword)
     , options.signal && signal(options.signal)
     )
@@ -40,10 +43,14 @@ export class ConfigurationClient {
       .then(toJSON) as IConfiguration
   }
 
-  async setDuration(id: string, val: number, options: IGeyserManagerRequestOptions = {}): Promise<void> {
+  async setDuration(
+    namespace: string
+  , val: number
+  , options: IGeyserManagerRequestOptions = {}
+  ): Promise<void> {
     const req = put(
       url(this.options.server)
-    , pathname(`/admin/geyser/${id}/config/duration`)
+    , pathname(`/admin/geyser/${namespace}/config/duration`)
     , password(this.options.adminPassword)
     , json(val)
     , options.signal && signal(options.signal)
@@ -52,10 +59,13 @@ export class ConfigurationClient {
     await fetch(req).then(ok)
   }
 
-  async removeDuration(id: string, options: IGeyserManagerRequestOptions = {}): Promise<void> {
+  async removeDuration(
+    namespace: string
+  , options: IGeyserManagerRequestOptions = {}
+  ): Promise<void> {
     const req = del(
       url(this.options.server)
-    , pathname(`/admin/geyser/${id}/config/duration`)
+    , pathname(`/admin/geyser/${namespace}/config/duration`)
     , password(this.options.adminPassword)
     , options.signal && signal(options.signal)
     )
@@ -63,10 +73,14 @@ export class ConfigurationClient {
     await fetch(req).then(ok)
   }
 
-  async setLimit(id: string, val: number, options: IGeyserManagerRequestOptions = {}): Promise<void> {
+  async setLimit(
+    namespace: string
+  , val: number
+  , options: IGeyserManagerRequestOptions = {}
+  ): Promise<void> {
     const req = put(
       url(this.options.server)
-    , pathname(`/admin/geyser/${id}/config/limit`)
+    , pathname(`/admin/geyser/${namespace}/config/limit`)
     , password(this.options.adminPassword)
     , json(val)
     , options.signal && signal(options.signal)
@@ -75,10 +89,13 @@ export class ConfigurationClient {
     await fetch(req).then(ok)
   }
 
-  async removeLimit(id: string, options: IGeyserManagerRequestOptions = {}): Promise<void> {
+  async removeLimit(
+    namespace: string
+  , options: IGeyserManagerRequestOptions = {}
+  ): Promise<void> {
     const req = del(
       url(this.options.server)
-    , pathname(`/admin/geyser/${id}/config/limit`)
+    , pathname(`/admin/geyser/${namespace}/config/limit`)
     , password(this.options.adminPassword)
     , options.signal && signal(options.signal)
     )

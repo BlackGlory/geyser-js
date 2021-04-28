@@ -8,21 +8,25 @@ beforeEach(() => server.resetHandlers())
 afterAll(() => server.close())
 
 describe('TokenClient', () => {
-  it('getIds(): Promise<string[]>', async () => {
+  test('getNamespaces(): Promise<string[]>', async () => {
     const client = createClient()
 
-    const result = client.getIds()
+    const result = client.getNamespaces()
     const proResult = await result
 
     expect(result).toBePromise()
-    expect(proResult).toStrictEqual(['id'])
+    expect(proResult).toStrictEqual(['namespace'])
   })
 
-  it('getTokens(id: string): Promise<Array<{ token: string; write: boolean; read: boolean }>>', async () => {
+  test(`
+    getTokens(
+      namespace: string
+    ): Promise<Array<{ token: string; write: boolean; read: boolean }>>
+  `, async () => {
     const client = createClient()
-    const id = 'id'
+    const namespace = 'namespace'
 
-    const result = client.getTokens(id)
+    const result = client.getTokens(namespace)
     const proResult = await result
 
     expect(result).toBePromise()
@@ -32,24 +36,24 @@ describe('TokenClient', () => {
     }])
   })
 
-  it('addAcquireToken(id: string, token: string): Promise<void>', async () => {
+  test('addAcquireToken(namespace: string, token: string): Promise<void>', async () => {
     const client = createClient()
-    const id = 'id'
+    const namespace = 'namespace'
     const token = 'token'
 
-    const result = client.addAcquireToken(id, token)
+    const result = client.addAcquireToken(namespace, token)
     const proResult = await result
 
     expect(result).toBePromise()
     expect(proResult).toBeUndefined()
   })
 
-  it('removeAcquireToken(id: string, token: string): Promise<void>', async () => {
+  test('removeAcquireToken(namespace: string, token: string): Promise<void>', async () => {
     const client = createClient()
-    const id = 'id'
+    const namespace = 'namespace'
     const token = 'token'
 
-    const result = client.removeAcquireToken(id, token)
+    const result = client.removeAcquireToken(namespace, token)
     const proResult = await result
 
     expect(result).toBePromise()
