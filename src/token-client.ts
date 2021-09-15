@@ -1,25 +1,19 @@
 import { fetch } from 'extra-fetch'
-import { password } from './utils'
 import { get, put, del } from 'extra-request'
-import { url, pathname, signal } from 'extra-request/lib/es2018/transformers'
+import { pathname } from 'extra-request/lib/es2018/transformers'
 import { ok, toJSON } from 'extra-response'
-import type { IGeyserManagerOptions } from './geyser-manager'
-import { IGeyserManagerRequestOptions } from './types'
+import { IGeyserManagerRequestOptions, GeyserManagerBase } from './utils'
 
 interface ITokenInfo {
   token: string
   acquire: boolean
 }
 
-export class TokenClient {
-  constructor(private options: IGeyserManagerOptions) {}
-
+export class TokenClient extends GeyserManagerBase {
   async getNamespaces(options: IGeyserManagerRequestOptions = {}): Promise<string[]> {
     const req = get(
-      url(this.options.server)
+      ...this.getCommonTransformers(options)
     , pathname('/admin/geyser-with-tokens')
-    , password(this.options.adminPassword)
-    , options.signal && signal(options.signal)
     )
 
     return await fetch(req)
@@ -32,10 +26,8 @@ export class TokenClient {
   , options: IGeyserManagerRequestOptions = {}
   ): Promise<ITokenInfo[]> {
     const req = get(
-      url(this.options.server)
+      ...this.getCommonTransformers(options)
     , pathname(`/admin/geyser/${namespace}/tokens`)
-    , password(this.options.adminPassword)
-    , options.signal && signal(options.signal)
     )
 
     return await fetch(req)
@@ -49,10 +41,8 @@ export class TokenClient {
   , options: IGeyserManagerRequestOptions = {}
   ): Promise<void> {
     const req = put(
-      url(this.options.server)
+      ...this.getCommonTransformers(options)
     , pathname(`/admin/geyser/${namespace}/tokens/${token}/acquire`)
-    , password(this.options.adminPassword)
-    , options.signal && signal(options.signal)
     )
 
     await fetch(req).then(ok)
@@ -64,10 +54,8 @@ export class TokenClient {
   , options: IGeyserManagerRequestOptions = {}
   ): Promise<void> {
     const req = del(
-      url(this.options.server)
+      ...this.getCommonTransformers(options)
     , pathname(`/admin/geyser/${namespace}/tokens/${token}/acquire`)
-    , password(this.options.adminPassword)
-    , options.signal && signal(options.signal)
     )
 
     await fetch(req).then(ok)

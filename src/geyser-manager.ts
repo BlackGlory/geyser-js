@@ -7,7 +7,10 @@ import { TokenClient } from './token-client'
 export interface IGeyserManagerOptions {
   server: string
   adminPassword: string
+  keepalive?: boolean
+  timeout?: number
 }
+
 export class GeyserManager {
   constructor(private options: IGeyserManagerOptions) {}
 

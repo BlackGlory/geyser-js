@@ -17,6 +17,7 @@ new GeyserClient({
   server: string
 , token?: string
 , keepalive?: boolean
+, timeout?: number
 })
 ```
 
@@ -25,13 +26,17 @@ interface IGeyserClientRequestOptions {
   signal?: AbortSignal
   token?: string
   keepalive?: boolean
+  timeout?: number | false
 }
 ```
 
 #### acquire
 
 ```ts
-GeyserClient#acquire(namespace: string, options?: IGeyserClientRequestOptions): Promise<void>
+GeyserClient#acquire(
+  namespace: string
+, options?: IGeyserClientRequestOptions
+): Promise<void>
 ```
 
 ### GeyserManager
@@ -40,12 +45,16 @@ GeyserClient#acquire(namespace: string, options?: IGeyserClientRequestOptions): 
 new GeyserManager({
   server: string
 , adminPassword: string
+, keepalive?: boolean
+, timeout?: number
 })
 ```
 
 ```ts
 interface IGeyserManagerRequestOptions {
   signal?: AbortSignal
+, keepalive?: boolean
+, timeout?: number | false
 }
 ```
 

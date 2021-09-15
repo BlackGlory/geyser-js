@@ -1,25 +1,19 @@
 import { fetch } from 'extra-fetch'
-import { password } from './utils'
 import { get, put, del } from 'extra-request'
-import { url, pathname, json, signal } from 'extra-request/lib/es2018/transformers'
+import { pathname, json } from 'extra-request/lib/es2018/transformers'
 import { ok, toJSON } from 'extra-response'
-import type { IGeyserManagerOptions } from './geyser-manager'
-import { IGeyserManagerRequestOptions } from './types'
+import { IGeyserManagerRequestOptions, GeyserManagerBase } from './utils'
 
 interface IConfiguration {
   duration: number | null
   limit: number | null
 }
 
-export class ConfigurationClient {
-  constructor(private options: IGeyserManagerOptions) {}
-
+export class ConfigurationClient extends GeyserManagerBase {
   async getNamespaces(options: IGeyserManagerRequestOptions = {}): Promise<string[]> {
     const req = get(
-      url(this.options.server)
+      ...this.getCommonTransformers(options)
     , pathname('/admin/geyser-with-config')
-    , password(this.options.adminPassword)
-    , options.signal && signal(options.signal)
     )
 
     return await fetch(req)
@@ -32,10 +26,8 @@ export class ConfigurationClient {
   , options: IGeyserManagerRequestOptions = {}
   ): Promise<IConfiguration> {
     const req = get(
-      url(this.options.server)
+      ...this.getCommonTransformers(options)
     , pathname(`/admin/geyser/${namespace}/config`)
-    , password(this.options.adminPassword)
-    , options.signal && signal(options.signal)
     )
 
     return await fetch(req)
@@ -49,11 +41,9 @@ export class ConfigurationClient {
   , options: IGeyserManagerRequestOptions = {}
   ): Promise<void> {
     const req = put(
-      url(this.options.server)
+      ...this.getCommonTransformers(options)
     , pathname(`/admin/geyser/${namespace}/config/duration`)
-    , password(this.options.adminPassword)
     , json(val)
-    , options.signal && signal(options.signal)
     )
 
     await fetch(req).then(ok)
@@ -64,10 +54,8 @@ export class ConfigurationClient {
   , options: IGeyserManagerRequestOptions = {}
   ): Promise<void> {
     const req = del(
-      url(this.options.server)
+      ...this.getCommonTransformers(options)
     , pathname(`/admin/geyser/${namespace}/config/duration`)
-    , password(this.options.adminPassword)
-    , options.signal && signal(options.signal)
     )
 
     await fetch(req).then(ok)
@@ -79,11 +67,9 @@ export class ConfigurationClient {
   , options: IGeyserManagerRequestOptions = {}
   ): Promise<void> {
     const req = put(
-      url(this.options.server)
+      ...this.getCommonTransformers(options)
     , pathname(`/admin/geyser/${namespace}/config/limit`)
-    , password(this.options.adminPassword)
     , json(val)
-    , options.signal && signal(options.signal)
     )
 
     await fetch(req).then(ok)
@@ -94,10 +80,8 @@ export class ConfigurationClient {
   , options: IGeyserManagerRequestOptions = {}
   ): Promise<void> {
     const req = del(
-      url(this.options.server)
+      ...this.getCommonTransformers(options)
     , pathname(`/admin/geyser/${namespace}/config/limit`)
-    , password(this.options.adminPassword)
-    , options.signal && signal(options.signal)
     )
 
     await fetch(req).then(ok)
