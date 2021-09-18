@@ -1,7 +1,7 @@
 import { fetch } from 'extra-fetch'
 import { get } from 'extra-request'
 import { url, pathname, searchParams, signal, keepalive }
-  from 'extra-request/lib/es2018/transformers'
+  from 'extra-request/transformers/index.js'
 import { ok } from 'extra-response'
 import { timeoutSignal, raceAbortSignals } from 'extra-promise'
 
