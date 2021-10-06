@@ -9,6 +9,9 @@ interface ITokenPolicy {
 }
 
 export class TokenPolicyClient extends GeyserManagerBase {
+  /**
+   * @throws AbortError
+   */
   async getNamespaces(options: IGeyserManagerRequestOptions = {}): Promise<string[]> {
     const req = get(
       ...this.getCommonTransformers(options)
@@ -20,6 +23,9 @@ export class TokenPolicyClient extends GeyserManagerBase {
       .then(toJSON) as string[]
   }
 
+  /**
+   * @throws AbortError
+   */
   async get(
     namespace: string
   , options: IGeyserManagerRequestOptions = {}
@@ -34,6 +40,9 @@ export class TokenPolicyClient extends GeyserManagerBase {
       .then(toJSON) as ITokenPolicy
   }
 
+  /**
+   * @throws AbortError
+   */
   async setAcquireTokenRequired(
     namespace: string
   , val: boolean
@@ -48,6 +57,9 @@ export class TokenPolicyClient extends GeyserManagerBase {
     await fetch(req).then(ok)
   }
 
+  /**
+   * @throws AbortError
+   */
   async removeAcquireTokenRequired(
     namespace: string
   , options: IGeyserManagerRequestOptions = {}

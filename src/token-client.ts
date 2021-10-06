@@ -10,6 +10,9 @@ interface ITokenInfo {
 }
 
 export class TokenClient extends GeyserManagerBase {
+  /**
+   * @throws AbortError
+   */
   async getNamespaces(options: IGeyserManagerRequestOptions = {}): Promise<string[]> {
     const req = get(
       ...this.getCommonTransformers(options)
@@ -21,6 +24,9 @@ export class TokenClient extends GeyserManagerBase {
       .then(toJSON) as string[]
   }
 
+  /**
+   * @throws AbortError
+   */
   async getTokens(
     namespace: string
   , options: IGeyserManagerRequestOptions = {}
@@ -35,6 +41,9 @@ export class TokenClient extends GeyserManagerBase {
       .then(toJSON) as ITokenInfo[]
   }
 
+  /**
+   * @throws AbortError
+   */
   async addAcquireToken(
     namespace: string
   , token: string
@@ -48,6 +57,9 @@ export class TokenClient extends GeyserManagerBase {
     await fetch(req).then(ok)
   }
 
+  /**
+   * @throws AbortError
+   */
   async removeAcquireToken(
     namespace: string
   , token: string

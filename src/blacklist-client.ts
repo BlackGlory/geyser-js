@@ -5,6 +5,9 @@ import { ok, toJSON } from 'extra-response'
 import { IGeyserManagerRequestOptions, GeyserManagerBase } from './utils'
 
 export class BlacklistClient extends GeyserManagerBase {
+  /**
+   * @throws AbortError
+   */
   async getNamespaces(options: IGeyserManagerRequestOptions = {}): Promise<string[]> {
     const req = get(
       ...this.getCommonTransformers(options)
@@ -16,6 +19,9 @@ export class BlacklistClient extends GeyserManagerBase {
       .then(toJSON) as string[]
   }
 
+  /**
+   * @throws AbortError
+   */
   async add(namespace: string, options: IGeyserManagerRequestOptions = {}): Promise<void> {
     const req = put(
       ...this.getCommonTransformers(options)
@@ -25,6 +31,9 @@ export class BlacklistClient extends GeyserManagerBase {
     await fetch(req).then(ok)
   }
 
+  /**
+   * @throws AbortError
+   */
   async remove(namespace: string, options: IGeyserManagerRequestOptions = {}): Promise<void> {
     const req = del(
       ...this.getCommonTransformers(options)
