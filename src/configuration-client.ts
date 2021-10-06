@@ -11,7 +11,7 @@ interface IConfiguration {
 
 export class ConfigurationClient extends GeyserManagerBase {
   /**
-   * @throws AbortError
+   * @throws {AbortError}
    */
   async getNamespaces(options: IGeyserManagerRequestOptions = {}): Promise<string[]> {
     const req = get(
@@ -25,7 +25,7 @@ export class ConfigurationClient extends GeyserManagerBase {
   }
 
   /**
-   * @throws AbortError
+   * @throws {AbortError}
    */
   async get(
     namespace: string
@@ -42,7 +42,7 @@ export class ConfigurationClient extends GeyserManagerBase {
   }
 
   /**
-   * @throws AbortError
+   * @throws {AbortError}
    */
   async setDuration(
     namespace: string
@@ -59,7 +59,7 @@ export class ConfigurationClient extends GeyserManagerBase {
   }
 
   /**
-   * @throws AbortError
+   * @throws {AbortError}
    */
   async removeDuration(
     namespace: string
@@ -74,7 +74,7 @@ export class ConfigurationClient extends GeyserManagerBase {
   }
 
   /**
-   * @throws AbortError
+   * @throws {AbortError}
    */
   async setLimit(
     namespace: string
@@ -91,7 +91,7 @@ export class ConfigurationClient extends GeyserManagerBase {
   }
 
   /**
-   * @throws AbortError
+   * @throws {AbortError}
    */
   async removeLimit(
     namespace: string

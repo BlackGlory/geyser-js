@@ -6,7 +6,7 @@ import { IGeyserManagerRequestOptions, GeyserManagerBase } from './utils'
 
 export class BlacklistClient extends GeyserManagerBase {
   /**
-   * @throws AbortError
+   * @throws {AbortError}
    */
   async getNamespaces(options: IGeyserManagerRequestOptions = {}): Promise<string[]> {
     const req = get(
@@ -20,7 +20,7 @@ export class BlacklistClient extends GeyserManagerBase {
   }
 
   /**
-   * @throws AbortError
+   * @throws {AbortError}
    */
   async add(namespace: string, options: IGeyserManagerRequestOptions = {}): Promise<void> {
     const req = put(
@@ -32,7 +32,7 @@ export class BlacklistClient extends GeyserManagerBase {
   }
 
   /**
-   * @throws AbortError
+   * @throws {AbortError}
    */
   async remove(namespace: string, options: IGeyserManagerRequestOptions = {}): Promise<void> {
     const req = del(

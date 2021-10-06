@@ -11,7 +11,7 @@ interface ITokenInfo {
 
 export class TokenClient extends GeyserManagerBase {
   /**
-   * @throws AbortError
+   * @throws {AbortError}
    */
   async getNamespaces(options: IGeyserManagerRequestOptions = {}): Promise<string[]> {
     const req = get(
@@ -25,7 +25,7 @@ export class TokenClient extends GeyserManagerBase {
   }
 
   /**
-   * @throws AbortError
+   * @throws {AbortError}
    */
   async getTokens(
     namespace: string
@@ -42,7 +42,7 @@ export class TokenClient extends GeyserManagerBase {
   }
 
   /**
-   * @throws AbortError
+   * @throws {AbortError}
    */
   async addAcquireToken(
     namespace: string
@@ -58,7 +58,7 @@ export class TokenClient extends GeyserManagerBase {
   }
 
   /**
-   * @throws AbortError
+   * @throws {AbortError}
    */
   async removeAcquireToken(
     namespace: string

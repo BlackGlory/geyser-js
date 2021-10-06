@@ -25,7 +25,7 @@ export class GeyserClient {
   constructor(private options: IGeyserClientOptions) {}
 
   /**
-   * @throws AbortError
+   * @throws {AbortError}
    */
   async acquire(
     namespace: string
