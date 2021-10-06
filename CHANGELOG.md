@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.2.5](https://github.com/BlackGlory/geyser-js/compare/v0.2.4...v0.2.5) (2021-10-06)
+
+
+### Features
+
+* export AbortError ([3774fd0](https://github.com/BlackGlory/geyser-js/commit/3774fd06aa8efd60f57534fe66c3ab5efc2cb691))
+
 ### [0.2.4](https://github.com/BlackGlory/geyser-js/compare/v0.2.3...v0.2.4) (2021-09-18)
 
 
