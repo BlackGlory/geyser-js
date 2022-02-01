@@ -1,7 +1,5 @@
 # geyser-js
-
 ## Install
-
 ```sh
 npm install --save @blackglory/geyser-js
 # or
@@ -9,9 +7,7 @@ yarn add @blackglory/geyser-js
 ```
 
 ## API
-
 ### GeyserClient
-
 ```ts
 new GeyserClient({
   server: string
@@ -31,7 +27,6 @@ interface IGeyserClientRequestOptions {
 ```
 
 #### acquire
-
 ```ts
 GeyserClient#acquire(
   namespace: string
@@ -40,7 +35,6 @@ GeyserClient#acquire(
 ```
 
 ### GeyserManager
-
 ```ts
 new GeyserManager({
   server: string
@@ -58,10 +52,17 @@ interface IGeyserManagerRequestOptions {
 }
 ```
 
+#### Cycle
+##### resetCycle
+```ts
+GeyserManager#Cycle.resetCycle(
+  namespace: string
+, options?: IGeyserManagerRequestOptions
+): Promise<void>
+```
+
 #### Configuration
-
 ##### getNamespaces
-
 ```ts
 GeyserManager#Configuration.getNamespaces(
   options?: IGeyserManagerRequestOptions
@@ -69,7 +70,6 @@ GeyserManager#Configuration.getNamespaces(
 ```
 
 ##### get
-
 ```ts
 GeyserManager#Configuration.get(
   namespace: string
@@ -81,7 +81,6 @@ GeyserManager#Configuration.get(
 ```
 
 ##### setDuration
-
 ```ts
 GeyserManager#Configuration.setDuration(
   namespace: string
@@ -91,7 +90,6 @@ GeyserManager#Configuration.setDuration(
 ```
 
 ##### removeDuration
-
 ```ts
 GeyserManager#Configuration.removeDuration(
   namespace: string
@@ -100,7 +98,6 @@ GeyserManager#Configuration.removeDuration(
 ```
 
 ##### setLimit
-
 ```ts
 GeyserManager#Configuration.setLimit(
   namespace: string
@@ -110,7 +107,6 @@ GeyserManager#Configuration.setLimit(
 ```
 
 ##### removeLimit
-
 ```ts
 GeyserManager#Configuration.removeLimit(
   namespace: string
@@ -119,9 +115,7 @@ GeyserManager#Configuration.removeLimit(
 ```
 
 #### Blacklist
-
 ##### getNamespaces
-
 ```ts
 GeyserManager#Blacklist.getNamespaces(
   options?: IGeyserManagerRequestOptions
@@ -129,7 +123,6 @@ GeyserManager#Blacklist.getNamespaces(
 ```
 
 ##### add
-
 ```ts
 GeyserManager#Blacklist.add(
   namespace: string
@@ -138,7 +131,6 @@ GeyserManager#Blacklist.add(
 ```
 
 ##### remove
-
 ```ts
 GeyserManager#Blacklist.remove(
   namespace: string
@@ -147,9 +139,7 @@ GeyserManager#Blacklist.remove(
 ```
 
 #### Whitelist
-
 ##### getNamespaces
-
 ```ts
 GeyserManager#Whitelist.getNamespaces(
   options?: IGeyserManagerRequestOptions
@@ -157,7 +147,6 @@ GeyserManager#Whitelist.getNamespaces(
 ```
 
 ##### add
-
 ```ts
 GeyserManager#Whitelist.add(
   namespace: string
@@ -166,7 +155,6 @@ GeyserManager#Whitelist.add(
 ```
 
 ##### remove
-
 ```ts
 GeyserManager#Whitelist.remove(
   namespace: string
@@ -175,9 +163,7 @@ GeyserManager#Whitelist.remove(
 ```
 
 #### TokenPolicy
-
 ##### getNamespaces
-
 ```ts
 GeyserManager#TokenPolicy.getNamespaces(
   options?: IGeyserManagerRequestOptions
@@ -185,7 +171,6 @@ GeyserManager#TokenPolicy.getNamespaces(
 ```
 
 ##### get
-
 ```ts
 GeyserManager#TokenPolicy.get(
   namespace: string
@@ -196,7 +181,6 @@ GeyserManager#TokenPolicy.get(
 ```
 
 ##### setAcquireTokenRequired
-
 ```ts
 GeyserManager#TokenPolicy.setAcquireTokenRequired(
   namespace: string
@@ -206,7 +190,6 @@ GeyserManager#TokenPolicy.setAcquireTokenRequired(
 ```
 
 ##### removeAcquireTokenRequired
-
 ```ts
 GeyserManager#TokenPolicy.removeAcquireTokenRequired(
   namespace: string
@@ -215,9 +198,7 @@ GeyserManager#TokenPolicy.removeAcquireTokenRequired(
 ```
 
 #### Token
-
 ##### getNamespaces
-
 ```ts
 GeyserManager#Token.getNamespaces(
   options?: IGeyserManagerRequestOptions
@@ -225,7 +206,6 @@ GeyserManager#Token.getNamespaces(
 ```
 
 ##### getTokens
-
 ```ts
 GeyserManager#Token.getTokens(
   namespace: string
@@ -236,7 +216,6 @@ GeyserManager#Token.getTokens(
 ```
 
 ##### addAcquireToken
-
 ```ts
 GeyserManager#Token.addAcquireToken(
   namespace: string
@@ -246,7 +225,6 @@ GeyserManager#Token.addAcquireToken(
 ```
 
 ##### removeAcquireToken
-
 ```ts
 GeyserManager#Token.removeAcquireToken(
   namespace: string

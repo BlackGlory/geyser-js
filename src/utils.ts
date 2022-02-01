@@ -26,7 +26,7 @@ export class GeyserManagerBase {
         )
       ]))
     , keepalive(options.keepalive ?? this.options.keepalive)
-    , header('Accept-Version', '0.2.6')
+    , header('Accept-Version', '0.2.7')
     ]
   }
 }
