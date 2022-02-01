@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.5.0](https://github.com/BlackGlory/geyser-js/compare/v0.4.0...v0.5.0) (2022-02-01)
+
+
+### ⚠ BREAKING CHANGES
+
+* It requires Geyser 0.2.7
+
+### Features
+
+* add Cycle.resetCycle ([dc9b447](https://github.com/BlackGlory/geyser-js/commit/dc9b44777c92ca7933ff809ad01967b06c916848))
+
 ## [0.4.0](https://github.com/BlackGlory/geyser-js/compare/v0.3.1...v0.4.0) (2022-01-17)
 
 
