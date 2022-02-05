@@ -12,6 +12,10 @@ yarn add @blackglory/geyser-js
 new GeyserClient({
   server: string
 , token?: string
+, basicAuth?: {
+    username: string
+  , password: string
+  }
 , keepalive?: boolean
 , timeout?: number
 })
