@@ -9,6 +9,8 @@ export interface IGeyserManagerRequestOptions {
   timeout?: number | false
 }
 
+export const expectedVersion = '0.2.7'
+
 export class GeyserManagerBase {
   constructor(private options: IGeyserManagerOptions) {}
 
@@ -26,7 +28,7 @@ export class GeyserManagerBase {
         )
       ]))
     , keepalive(options.keepalive ?? this.options.keepalive)
-    , header('Accept-Version', '0.2.7')
+    , header('Accept-Version', expectedVersion)
     ]
   }
 }

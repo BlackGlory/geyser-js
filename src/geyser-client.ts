@@ -1,9 +1,10 @@
 import { fetch } from 'extra-fetch'
 import { get } from 'extra-request'
-import { url, pathname, searchParams, signal, keepalive, basicAuth }
+import { url, pathname, searchParams, signal, keepalive, basicAuth, header }
   from 'extra-request/transformers/index.js'
 import { ok } from 'extra-response'
 import { timeoutSignal, raceAbortSignals } from 'extra-abort'
+import { expectedVersion } from './utils'
 
 export { HTTPClientError } from '@blackglory/http-status'
 
@@ -51,6 +52,7 @@ export class GeyserClient {
         )
       ]))
     , keepalive(options.keepalive ?? this.options.keepalive)
+    , header('Accept-Version', expectedVersion)
     )
 
     await fetch(req).then(ok)
