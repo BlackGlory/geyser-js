@@ -2,6 +2,7 @@ import { IHTTPOptionsTransformer } from 'extra-request'
 import { url, signal, keepalive, bearerAuth, header } from 'extra-request/transformers/index.js'
 import { timeoutSignal, raceAbortSignals } from 'extra-abort'
 import type { IGeyserManagerOptions } from './geyser-manager'
+import { Falsy } from 'justypes'
 
 export interface IGeyserManagerRequestOptions {
   signal?: AbortSignal
@@ -16,7 +17,7 @@ export class GeyserManagerBase {
 
   protected getCommonTransformers(
     options: IGeyserManagerRequestOptions
-  ): IHTTPOptionsTransformer[] {
+  ): Array<IHTTPOptionsTransformer | Falsy> {
     return [
       url(this.options.server)
     , bearerAuth(this.options.adminPassword)
@@ -27,7 +28,7 @@ export class GeyserManagerBase {
           (this.options.timeout && timeoutSignal(this.options.timeout))
         )
       ]))
-    , keepalive(options.keepalive ?? this.options.keepalive)
+    , (options.keepalive ?? this.options.keepalive) && keepalive()
     , header('Accept-Version', expectedVersion)
     ]
   }
