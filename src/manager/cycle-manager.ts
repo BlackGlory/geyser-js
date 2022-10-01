@@ -2,9 +2,9 @@ import { fetch } from 'extra-fetch'
 import { del } from 'extra-request'
 import { pathname } from 'extra-request/transformers/index.js'
 import { ok } from 'extra-response'
-import { IGeyserManagerRequestOptions, GeyserManagerBase } from './utils'
+import { IGeyserManagerRequestOptions, Base } from './base'
 
-export class CycleClient extends GeyserManagerBase {
+export class CycleManager extends Base {
   /**
    * @throws {AbortError}
    */

@@ -1,5 +1,5 @@
-import { server } from '@test/geyser.mock'
-import { GeyserClient } from '@src/geyser-client'
+import { server } from '@test/client.mock'
+import { GeyserClient } from '@src/client'
 import { TOKEN } from './utils'
 import '@blackglory/jest-matchers'
 

@@ -1,5 +1,5 @@
-import { server } from '@test/cycle.mock'
-import { CycleClient } from '@src/cycle-client'
+import { server } from './cycle-manager.mock'
+import { CycleManager } from '@manager/cycle-manager'
 import { ADMIN_PASSWORD } from '@test/utils'
 import '@blackglory/jest-matchers'
 
@@ -7,9 +7,9 @@ beforeAll(() => server.listen({ onUnhandledRequest: 'error' }))
 beforeEach(() => server.resetHandlers())
 afterAll(() => server.close())
 
-describe('CycleClient', () => {
+describe('CycleManager', () => {
   test('removeDuration(namespace: string): Promise<void>', async () => {
-    const client = createClient()
+    const client = createManager()
     const namespace = 'namespace'
 
     const result = client.resetCycle(namespace)
@@ -20,8 +20,8 @@ describe('CycleClient', () => {
   })
 })
 
-function createClient() {
-  return new CycleClient({
+function createManager() {
+  return new CycleManager({
     server: 'http://localhost'
   , adminPassword: ADMIN_PASSWORD
   })

@@ -2,9 +2,9 @@ import { fetch } from 'extra-fetch'
 import { get, put, del } from 'extra-request'
 import { pathname } from 'extra-request/transformers/index.js'
 import { ok, toJSON } from 'extra-response'
-import { IGeyserManagerRequestOptions, GeyserManagerBase } from './utils'
+import { IGeyserManagerRequestOptions, Base } from './base'
 
-export class BlacklistClient extends GeyserManagerBase {
+export class BlacklistManager extends Base {
   /**
    * @throws {AbortError}
    */

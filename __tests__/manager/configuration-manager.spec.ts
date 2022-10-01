@@ -1,5 +1,5 @@
-import { server } from '@test/configuration.mock'
-import { ConfigurationClient } from '@src/configuration-client'
+import { server } from './configuration-manager.mock'
+import { ConfigurationManager } from '@manager/configuration-manager'
 import { ADMIN_PASSWORD } from '@test/utils'
 import '@blackglory/jest-matchers'
 
@@ -7,9 +7,9 @@ beforeAll(() => server.listen({ onUnhandledRequest: 'error' }))
 beforeEach(() => server.resetHandlers())
 afterAll(() => server.close())
 
-describe('ConfigurationClient', () => {
+describe('ConfigurationManager', () => {
   test('getNamespaces(): Promise<string[]>', async () => {
-    const client = createClient()
+    const client = createManager()
 
     const result = client.getNamespaces()
     const proResult = await result
@@ -19,7 +19,7 @@ describe('ConfigurationClient', () => {
   })
 
   test('get(namespace: string): Promise<Configuration>', async () => {
-    const client = createClient()
+    const client = createManager()
     const namespace = 'namespace'
 
     const result = client.get(namespace)
@@ -33,7 +33,7 @@ describe('ConfigurationClient', () => {
   })
 
   test('setDuration(namespace: string, val: number): Promise<void>', async () => {
-    const client = createClient()
+    const client = createManager()
     const namespace = 'namespace'
     const val = 100
 
@@ -45,7 +45,7 @@ describe('ConfigurationClient', () => {
   })
 
   test('removeDuration(namespace: string): Promise<void>', async () => {
-    const client = createClient()
+    const client = createManager()
     const namespace = 'namespace'
 
     const result = client.removeDuration(namespace)
@@ -56,7 +56,7 @@ describe('ConfigurationClient', () => {
   })
 
   test('setLimit(namespace: string, val: number): Promise<void>', async () => {
-    const client = createClient()
+    const client = createManager()
     const namespace = 'namespace'
     const val = 100
 
@@ -68,7 +68,7 @@ describe('ConfigurationClient', () => {
   })
 
   test('removeLimit(namespace: string): Promise<void>', async () => {
-    const client = createClient()
+    const client = createManager()
     const namespace = 'namespace'
 
     const result = client.removeLimit(namespace)
@@ -79,8 +79,8 @@ describe('ConfigurationClient', () => {
   })
 })
 
-function createClient() {
-  return new ConfigurationClient({
+function createManager() {
+  return new ConfigurationManager({
     server: 'http://localhost'
   , adminPassword: ADMIN_PASSWORD
   })

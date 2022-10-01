@@ -2,14 +2,14 @@ import { fetch } from 'extra-fetch'
 import { get, put, del } from 'extra-request'
 import { pathname, json } from 'extra-request/transformers/index.js'
 import { ok, toJSON } from 'extra-response'
-import { IGeyserManagerRequestOptions, GeyserManagerBase } from './utils'
+import { IGeyserManagerRequestOptions, Base } from './base'
 
 interface IConfiguration {
   duration: number | null
   limit: number | null
 }
 
-export class ConfigurationClient extends GeyserManagerBase {
+export class ConfigurationManager extends Base {
   /**
    * @throws {AbortError}
    */

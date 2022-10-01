@@ -2,13 +2,13 @@ import { fetch } from 'extra-fetch'
 import { get, put, del } from 'extra-request'
 import { pathname, json } from 'extra-request/transformers/index.js'
 import { ok, toJSON } from 'extra-response'
-import { IGeyserManagerRequestOptions, GeyserManagerBase } from './utils'
+import { IGeyserManagerRequestOptions, Base } from './base'
 
 interface ITokenPolicy {
   acquireTokenRequired: boolean | null
 }
 
-export class TokenPolicyClient extends GeyserManagerBase {
+export class TokenPolicyManager extends Base {
   /**
    * @throws {AbortError}
    */

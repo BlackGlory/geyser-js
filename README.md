@@ -39,6 +39,12 @@ class GeyserClient {
 
 ### GeyserManager
 ```ts
+interface IGeyserManagerRequestOptions {
+  signal?: AbortSignal
+  keepalive?: boolean
+  timeout?: number | false
+}
+
 interface IGeyserManagerOptions {
   server: string
   adminPassword: string
@@ -49,23 +55,23 @@ interface IGeyserManagerOptions {
 class GeyserManager {
   constructor(options: IGeyserManagerOptions)
 
-  Configuration: ConfigurationClient
-  Cycle: CycleClient
-  Blacklist: BlacklistClient
-  Whitelist: WhitelistClient
-  TokenPolicy: TokenPolicyClient
-  Token: TokenClient
+  Configuration: ConfigurationManager
+  Cycle: CycleManager
+  Blacklist: BlacklistManager
+  Whitelist: WhitelistManager
+  TokenPolicy: TokenPolicyManager
+  Token: TokenManager
 }
 ```
 
-#### ConfigurationClient
+#### ConfigurationManager
 ```ts
 interface IConfiguration {
   duration: number | null
   limit: number | null
 }
 
-class ConfigurationClient {
+class ConfigurationManager {
   getNamespaces(options: IGeyserManagerRequestOptions = {}): Promise<string[]>
   get(
     namespace: string
@@ -92,9 +98,9 @@ class ConfigurationClient {
 }
 ```
 
-#### CycleClient
+#### CycleManager
 ```ts
-class CycleClient {
+class CycleManager {
   resetCycle(
     namespace: string
   , options: IGeyserManagerRequestOptions = {}
@@ -102,31 +108,31 @@ class CycleClient {
 }
 ```
 
-#### BlacklistClient
+#### BlacklistManager
 ```ts
-class BlacklistClient {
+class BlacklistManager {
   getNamespaces(options: IGeyserManagerRequestOptions = {}): Promise<string[]>
   add(namespace: string, options: IGeyserManagerRequestOptions = {}): Promise<void>
   remove(namespace: string, options: IGeyserManagerRequestOptions = {}): Promise<void>
 }
 ```
 
-#### WhitelistClient
+#### WhitelistManager
 ```ts
-class WhitelistClient {
+class WhitelistManager {
   getNamespaces(options: IGeyserManagerRequestOptions = {}): Promise<string[]>
   add(namespace: string, options: IGeyserManagerRequestOptions = {}): Promise<void>
   remove(namespace: string, options: IGeyserManagerRequestOptions = {}): Promise<void>
 }
 ```
 
-#### TokenPolicyClient
+#### TokenPolicyManager
 ```ts
 interface ITokenPolicy {
   acquireTokenRequired: boolean | null
 }
 
-class TokenPolicyClient {
+class TokenPolicyManager {
   getNamespaces(options: IGeyserManagerRequestOptions = {}): Promise<string[]>
   get(
     namespace: string
@@ -144,14 +150,14 @@ class TokenPolicyClient {
 }
 ```
 
-#### TokenClient
+#### TokenManager
 ```ts
 interface ITokenInfo {
   token: string
   acquire: boolean
 }
 
-class TokenClient {
+class TokenManager {
   getNamespaces(options: IGeyserManagerRequestOptions = {}): Promise<string[]>
   getTokens(
     namespace: string

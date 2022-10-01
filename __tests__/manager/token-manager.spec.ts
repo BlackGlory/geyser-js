@@ -1,5 +1,5 @@
-import { server } from '@test/token-policy.mock'
-import { TokenPolicyClient } from '@src/token-policy-client'
+import { server } from './token-manager.mock'
+import { TokenManager } from '@manager/token-manager'
 import { ADMIN_PASSWORD } from '@test/utils'
 import '@blackglory/jest-matchers'
 
@@ -7,9 +7,9 @@ beforeAll(() => server.listen({ onUnhandledRequest: 'error' }))
 beforeEach(() => server.resetHandlers())
 afterAll(() => server.close())
 
-describe('TokenPolicyClient', () => {
+describe('TokenManager', () => {
   test('getNamespaces(): Promise<string[]>', async () => {
-    const client = createClient()
+    const client = createManager()
 
     const result = client.getNamespaces()
     const proResult = await result
@@ -19,44 +19,41 @@ describe('TokenPolicyClient', () => {
   })
 
   test(`
-    get(
+    getTokens(
       namespace: string
-    ): Promise<{ acquireTokenRequired: boolean | null }>
+    ): Promise<Array<{ token: string; write: boolean; read: boolean }>>
   `, async () => {
-    const client = createClient()
+    const client = createManager()
     const namespace = 'namespace'
 
-    const result = client.get(namespace)
+    const result = client.getTokens(namespace)
     const proResult = await result
 
     expect(result).toBePromise()
-    expect(proResult).toStrictEqual({
-      acquireTokenRequired: true
-    })
+    expect(proResult).toStrictEqual([{
+      token: 'token'
+    , acquire: true
+    }])
   })
 
-  test(`
-    setAcquireTokenRequired(
-      namespace: string
-    , val: boolean
-    ): Promise<void>
-  `, async () => {
-    const client = createClient()
+  test('addAcquireToken(namespace: string, token: string): Promise<void>', async () => {
+    const client = createManager()
     const namespace = 'namespace'
-    const val = true
+    const token = 'token'
 
-    const result = client.setAcquireTokenRequired(namespace, val)
+    const result = client.addAcquireToken(namespace, token)
     const proResult = await result
 
     expect(result).toBePromise()
     expect(proResult).toBeUndefined()
   })
 
-  test('removeAcquireTokenRequired(namespace: string): Promise<void>', async () => {
-    const client = createClient()
+  test('removeAcquireToken(namespace: string, token: string): Promise<void>', async () => {
+    const client = createManager()
     const namespace = 'namespace'
+    const token = 'token'
 
-    const result = client.removeAcquireTokenRequired(namespace)
+    const result = client.removeAcquireToken(namespace, token)
     const proResult = await result
 
     expect(result).toBePromise()
@@ -64,8 +61,8 @@ describe('TokenPolicyClient', () => {
   })
 })
 
-function createClient() {
-  return new TokenPolicyClient({
+function createManager() {
+  return new TokenManager({
     server: 'http://localhost'
   , adminPassword: ADMIN_PASSWORD
   })
