@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.6.1](https://github.com/BlackGlory/geyser-js/compare/v0.6.0...v0.6.1) (2022-10-21)
+
+
+### Bug Fixes
+
+* dependencies ([90a46f8](https://github.com/BlackGlory/geyser-js/commit/90a46f811c8154861c05f3fe2cfa782a3309fddd))
+
 ## [0.6.0](https://github.com/BlackGlory/geyser-js/compare/v0.5.5...v0.6.0) (2022-10-21)
 
 
