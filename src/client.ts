@@ -6,8 +6,6 @@ import { ok } from 'extra-response'
 import { timeoutSignal, raceAbortSignals } from 'extra-abort'
 import { expectedVersion } from './utils'
 
-export { HTTPClientError } from '@blackglory/http-status'
-
 export interface IGeyserClientOptions {
   server: string
   token?: string
