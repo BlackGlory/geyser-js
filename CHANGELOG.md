@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.6.0](https://github.com/BlackGlory/geyser-js/compare/v0.5.5...v0.6.0) (2022-10-21)
+
+
+### ⚠ BREAKING CHANGES
+
+* Removed `HTTPClientError`, `HTTPError`, `AbortError`
+
+* remove `HTTPClientError`, `HTTPError`, `AbortError` ([1a39503](https://github.com/BlackGlory/geyser-js/commit/1a39503b9046917aebd77c355b75c7ade122e4e7))
+
 ### [0.5.5](https://github.com/BlackGlory/geyser-js/compare/v0.5.4...v0.5.5) (2022-09-30)
 
 
