@@ -1,6 +1,6 @@
 import { fetch } from 'extra-fetch'
 import { get, put, del } from 'extra-request'
-import { pathname, json } from 'extra-request/transformers/index.js'
+import { appendPathname, json } from 'extra-request/transformers/index.js'
 import { ok, toJSON } from 'extra-response'
 import { IGeyserManagerRequestOptions, Base } from './base'
 
@@ -15,7 +15,7 @@ export class TokenPolicyManager extends Base {
   async getNamespaces(options: IGeyserManagerRequestOptions = {}): Promise<string[]> {
     const req = get(
       ...this.getCommonTransformers(options)
-    , pathname('/admin/geyser-with-token-policies')
+    , appendPathname('/admin/geyser-with-token-policies')
     )
 
     return await fetch(req)
@@ -32,7 +32,7 @@ export class TokenPolicyManager extends Base {
   ): Promise<ITokenPolicy> {
     const req = get(
       ...this.getCommonTransformers(options)
-    , pathname(`/admin/geyser/${namespace}/token-policies`)
+    , appendPathname(`/admin/geyser/${namespace}/token-policies`)
     )
 
     return await fetch(req)
@@ -50,7 +50,7 @@ export class TokenPolicyManager extends Base {
   ): Promise<void> {
     const req = put(
       ...this.getCommonTransformers(options)
-    , pathname(`/admin/geyser/${namespace}/token-policies/acquire-token-required`)
+    , appendPathname(`/admin/geyser/${namespace}/token-policies/acquire-token-required`)
     , json(val)
     )
 
@@ -66,7 +66,7 @@ export class TokenPolicyManager extends Base {
   ): Promise<void> {
     const req = del(
       ...this.getCommonTransformers(options)
-    , pathname(`/admin/geyser/${namespace}/token-policies/acquire-token-required`)
+    , appendPathname(`/admin/geyser/${namespace}/token-policies/acquire-token-required`)
     )
 
     await fetch(req).then(ok)

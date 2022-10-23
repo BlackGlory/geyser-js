@@ -1,6 +1,6 @@
 import { fetch } from 'extra-fetch'
 import { get } from 'extra-request'
-import { url, pathname, searchParams, signal, keepalive, basicAuth, header }
+import { url, appendPathname, searchParams, signal, keepalive, basicAuth, header }
   from 'extra-request/transformers/index.js'
 import { ok } from 'extra-response'
 import { timeoutSignal, raceAbortSignals } from 'extra-abort'
@@ -39,7 +39,7 @@ export class GeyserClient {
 
     const req = get(
       url(this.options.server)
-    , pathname(`geyser/${namespace}`)
+    , appendPathname(`geyser/${namespace}`)
     , auth && basicAuth(auth.username, auth.password)
     , token && searchParams({ token })
     , signal(raceAbortSignals([

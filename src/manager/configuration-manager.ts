@@ -1,6 +1,6 @@
 import { fetch } from 'extra-fetch'
 import { get, put, del } from 'extra-request'
-import { pathname, json } from 'extra-request/transformers/index.js'
+import { appendPathname, json } from 'extra-request/transformers/index.js'
 import { ok, toJSON } from 'extra-response'
 import { IGeyserManagerRequestOptions, Base } from './base'
 
@@ -16,7 +16,7 @@ export class ConfigurationManager extends Base {
   async getNamespaces(options: IGeyserManagerRequestOptions = {}): Promise<string[]> {
     const req = get(
       ...this.getCommonTransformers(options)
-    , pathname('/admin/geyser-with-config')
+    , appendPathname('/admin/geyser-with-config')
     )
 
     return await fetch(req)
@@ -33,7 +33,7 @@ export class ConfigurationManager extends Base {
   ): Promise<IConfiguration> {
     const req = get(
       ...this.getCommonTransformers(options)
-    , pathname(`/admin/geyser/${namespace}/config`)
+    , appendPathname(`/admin/geyser/${namespace}/config`)
     )
 
     return await fetch(req)
@@ -51,7 +51,7 @@ export class ConfigurationManager extends Base {
   ): Promise<void> {
     const req = put(
       ...this.getCommonTransformers(options)
-    , pathname(`/admin/geyser/${namespace}/config/duration`)
+    , appendPathname(`/admin/geyser/${namespace}/config/duration`)
     , json(val)
     )
 
@@ -67,7 +67,7 @@ export class ConfigurationManager extends Base {
   ): Promise<void> {
     const req = del(
       ...this.getCommonTransformers(options)
-    , pathname(`/admin/geyser/${namespace}/config/duration`)
+    , appendPathname(`/admin/geyser/${namespace}/config/duration`)
     )
 
     await fetch(req).then(ok)
@@ -83,7 +83,7 @@ export class ConfigurationManager extends Base {
   ): Promise<void> {
     const req = put(
       ...this.getCommonTransformers(options)
-    , pathname(`/admin/geyser/${namespace}/config/limit`)
+    , appendPathname(`/admin/geyser/${namespace}/config/limit`)
     , json(val)
     )
 
@@ -99,7 +99,7 @@ export class ConfigurationManager extends Base {
   ): Promise<void> {
     const req = del(
       ...this.getCommonTransformers(options)
-    , pathname(`/admin/geyser/${namespace}/config/limit`)
+    , appendPathname(`/admin/geyser/${namespace}/config/limit`)
     )
 
     await fetch(req).then(ok)
