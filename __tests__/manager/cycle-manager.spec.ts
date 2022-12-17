@@ -1,7 +1,6 @@
 import { server } from './cycle-manager.mock'
 import { CycleManager } from '@manager/cycle-manager'
 import { ADMIN_PASSWORD } from '@test/utils'
-import '@blackglory/jest-matchers'
 
 beforeAll(() => server.listen({ onUnhandledRequest: 'error' }))
 beforeEach(() => server.resetHandlers())
@@ -12,11 +11,9 @@ describe('CycleManager', () => {
     const client = createManager()
     const namespace = 'namespace'
 
-    const result = client.resetCycle(namespace)
-    const proResult = await result
+    const result = await client.resetCycle(namespace)
 
-    expect(result).toBePromise()
-    expect(proResult).toBeUndefined()
+    expect(result).toBeUndefined()
   })
 })
 

@@ -1,7 +1,6 @@
 import { server } from './token-policy-manager.mock'
 import { TokenPolicyManager } from '@manager/token-policy-manager'
 import { ADMIN_PASSWORD } from '@test/utils'
-import '@blackglory/jest-matchers'
 
 beforeAll(() => server.listen({ onUnhandledRequest: 'error' }))
 beforeEach(() => server.resetHandlers())
@@ -11,11 +10,9 @@ describe('TokenPolicyManager', () => {
   test('getNamespaces(): Promise<string[]>', async () => {
     const client = createManager()
 
-    const result = client.getNamespaces()
-    const proResult = await result
+    const result = await client.getNamespaces()
 
-    expect(result).toBePromise()
-    expect(proResult).toStrictEqual(['namespace'])
+    expect(result).toStrictEqual(['namespace'])
   })
 
   test(`
@@ -26,11 +23,9 @@ describe('TokenPolicyManager', () => {
     const client = createManager()
     const namespace = 'namespace'
 
-    const result = client.get(namespace)
-    const proResult = await result
+    const result = await client.get(namespace)
 
-    expect(result).toBePromise()
-    expect(proResult).toStrictEqual({
+    expect(result).toStrictEqual({
       acquireTokenRequired: true
     })
   })
@@ -45,22 +40,18 @@ describe('TokenPolicyManager', () => {
     const namespace = 'namespace'
     const val = true
 
-    const result = client.setAcquireTokenRequired(namespace, val)
-    const proResult = await result
+    const result = await client.setAcquireTokenRequired(namespace, val)
 
-    expect(result).toBePromise()
-    expect(proResult).toBeUndefined()
+    expect(result).toBeUndefined()
   })
 
   test('removeAcquireTokenRequired(namespace: string): Promise<void>', async () => {
     const client = createManager()
     const namespace = 'namespace'
 
-    const result = client.removeAcquireTokenRequired(namespace)
-    const proResult = await result
+    const result = await client.removeAcquireTokenRequired(namespace)
 
-    expect(result).toBePromise()
-    expect(proResult).toBeUndefined()
+    expect(result).toBeUndefined()
   })
 })
 

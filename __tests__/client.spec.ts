@@ -1,7 +1,6 @@
 import { server } from '@test/client.mock'
 import { GeyserClient } from '@src/client'
 import { TOKEN } from './utils'
-import '@blackglory/jest-matchers'
 
 beforeAll(() => server.listen({ onUnhandledRequest: 'error' }))
 beforeEach(() => server.resetHandlers())
@@ -17,11 +16,9 @@ describe('GeyserClient', () => {
     const client = createClient()
     const namespace = 'namespace'
 
-    const result = client.acquire(namespace)
-    const proResult = await result
+    const result = await client.acquire(namespace)
 
-    expect(result).toBePromise()
-    expect(proResult).toBeUndefined()
+    expect(result).toBeUndefined()
   })
 })
 

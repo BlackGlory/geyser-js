@@ -1,7 +1,6 @@
 import { server } from './configuration-manager.mock'
 import { ConfigurationManager } from '@manager/configuration-manager'
 import { ADMIN_PASSWORD } from '@test/utils'
-import '@blackglory/jest-matchers'
 
 beforeAll(() => server.listen({ onUnhandledRequest: 'error' }))
 beforeEach(() => server.resetHandlers())
@@ -11,22 +10,18 @@ describe('ConfigurationManager', () => {
   test('getNamespaces(): Promise<string[]>', async () => {
     const client = createManager()
 
-    const result = client.getNamespaces()
-    const proResult = await result
+    const result = await client.getNamespaces()
 
-    expect(result).toBePromise()
-    expect(proResult).toStrictEqual(['namespace'])
+    expect(result).toStrictEqual(['namespace'])
   })
 
   test('get(namespace: string): Promise<Configuration>', async () => {
     const client = createManager()
     const namespace = 'namespace'
 
-    const result = client.get(namespace)
-    const proResult = await result
+    const result = await client.get(namespace)
 
-    expect(result).toBePromise()
-    expect(proResult).toStrictEqual({
+    expect(result).toStrictEqual({
       duration: null
     , limit: null
     })
@@ -37,22 +32,18 @@ describe('ConfigurationManager', () => {
     const namespace = 'namespace'
     const val = 100
 
-    const result = client.setDuration(namespace, val)
-    const proResult = await result
+    const result = await client.setDuration(namespace, val)
 
-    expect(result).toBePromise()
-    expect(proResult).toBeUndefined()
+    expect(result).toBeUndefined()
   })
 
   test('removeDuration(namespace: string): Promise<void>', async () => {
     const client = createManager()
     const namespace = 'namespace'
 
-    const result = client.removeDuration(namespace)
-    const proResult = await result
+    const result = await client.removeDuration(namespace)
 
-    expect(result).toBePromise()
-    expect(proResult).toBeUndefined()
+    expect(result).toBeUndefined()
   })
 
   test('setLimit(namespace: string, val: number): Promise<void>', async () => {
@@ -60,22 +51,18 @@ describe('ConfigurationManager', () => {
     const namespace = 'namespace'
     const val = 100
 
-    const result = client.setLimit(namespace, val)
-    const proResult = await result
+    const result = await client.setLimit(namespace, val)
 
-    expect(result).toBePromise()
-    expect(proResult).toBeUndefined()
+    expect(result).toBeUndefined()
   })
 
   test('removeLimit(namespace: string): Promise<void>', async () => {
     const client = createManager()
     const namespace = 'namespace'
 
-    const result = client.removeLimit(namespace)
-    const proResult = await result
+    const result = await client.removeLimit(namespace)
 
-    expect(result).toBePromise()
-    expect(proResult).toBeUndefined()
+    expect(result).toBeUndefined()
   })
 })
 
