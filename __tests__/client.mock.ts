@@ -1,6 +1,6 @@
 import { setupServer } from 'msw/node'
 import { rest } from 'msw'
-import { badToken } from './utils'
+import { badToken } from './utils.js'
 
 export const server = setupServer(
   rest.get('/geyser/:namespace', (req, res, ctx) => {

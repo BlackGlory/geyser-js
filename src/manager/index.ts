@@ -1,9 +1,9 @@
-import { ConfigurationManager } from './configuration-manager'
-import { CycleManager } from './cycle-manager'
-import { BlacklistManager } from './blacklist-manager'
-import { WhitelistManager } from './whitelist-manager'
-import { TokenPolicyManager } from './token-policy-manager'
-import { TokenManager } from './token-manager'
+import { ConfigurationManager } from './configuration-manager.js'
+import { CycleManager } from './cycle-manager.js'
+import { BlacklistManager } from './blacklist-manager.js'
+import { WhitelistManager } from './whitelist-manager.js'
+import { TokenPolicyManager } from './token-policy-manager.js'
+import { TokenManager } from './token-manager.js'
 
 export interface IGeyserManagerOptions {
   server: string

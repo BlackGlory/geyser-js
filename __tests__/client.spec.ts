@@ -1,6 +1,6 @@
-import { server } from '@test/client.mock'
-import { GeyserClient } from '@src/client'
-import { TOKEN } from './utils'
+import { server } from '@test/client.mock.js'
+import { GeyserClient } from '@src/client.js'
+import { TOKEN } from './utils.js'
 
 beforeAll(() => server.listen({ onUnhandledRequest: 'error' }))
 beforeEach(() => server.resetHandlers())

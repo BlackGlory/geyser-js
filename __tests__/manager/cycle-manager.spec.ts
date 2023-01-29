@@ -1,6 +1,6 @@
-import { server } from './cycle-manager.mock'
-import { CycleManager } from '@manager/cycle-manager'
-import { ADMIN_PASSWORD } from '@test/utils'
+import { server } from './cycle-manager.mock.js'
+import { CycleManager } from '@manager/cycle-manager.js'
+import { ADMIN_PASSWORD } from '@test/utils.js'
 
 beforeAll(() => server.listen({ onUnhandledRequest: 'error' }))
 beforeEach(() => server.resetHandlers())

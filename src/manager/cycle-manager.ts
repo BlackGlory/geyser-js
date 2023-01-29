@@ -1,8 +1,8 @@
 import { fetch } from 'extra-fetch'
 import { del } from 'extra-request'
-import { appendPathname } from 'extra-request/transformers/index.js'
+import { appendPathname } from 'extra-request/transformers'
 import { ok } from 'extra-response'
-import { IGeyserManagerRequestOptions, Base } from './base'
+import { IGeyserManagerRequestOptions, Base } from './base.js'
 
 export class CycleManager extends Base {
   /**
