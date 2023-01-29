@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.7.0](https://github.com/BlackGlory/geyser-js/compare/v0.6.3...v0.7.0) (2023-01-29)
+
+
+### ⚠ BREAKING CHANGES
+
+* - CommonJS => ESM.
+- The minimal version of Node.js is 16.
+- It requires Geyser^0.3.0.
+
+### Features
+
+* upgrade ([5e1628c](https://github.com/BlackGlory/geyser-js/commit/5e1628c45c7f6f900f7c8a5efbe5da21b1ac1615))
+
 ### [0.6.3](https://github.com/BlackGlory/geyser-js/compare/v0.6.2...v0.6.3) (2022-10-31)
 
 ### [0.6.2](https://github.com/BlackGlory/geyser-js/compare/v0.6.1...v0.6.2) (2022-10-23)
