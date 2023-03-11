@@ -54,8 +54,6 @@ class GeyserClient {
   ): Promise<void>
 
   /**
-   * 重置速率限制器的状态.
-   * 
    * @throws {RateLimiterNotFound}
    */
   resetRateLimiter(
