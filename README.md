@@ -66,5 +66,4 @@ class GeyserClient {
    */
   acquireToken(rateLimiterId: string, options?: IGeyserClientRequestOptions): Promise<void>
 }
-
 ```
