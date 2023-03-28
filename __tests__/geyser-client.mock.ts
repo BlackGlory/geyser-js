@@ -4,7 +4,7 @@ import { rest } from 'msw'
 export const server = setupServer(
   rest.get('/rate-limiters', (req, res, ctx) => {
     return res(
-      ctx.status(204)
+      ctx.status(200)
     , ctx.json([])
     )
   })
