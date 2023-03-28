@@ -9,7 +9,7 @@ yarn add @blackglory/geyser-js
 ## API
 ### GeyserClient
 ```ts
-interface IRateLimiterConfiguration extends JSONObject {
+interface IRateLimiterConfig extends JSONObject {
   duration: number | null
   limit: number | null
 }
@@ -40,11 +40,11 @@ class GeyserClient {
   getRateLimiter(
     rateLimiterId: string
   , options?: IGeyserClientRequestOptions
-  ): Promise<IRateLimiterConfiguration | null>
+  ): Promise<IRateLimiterConfig | null>
 
   setRateLimiter(
     rateLimiterId: string
-  , config: IRateLimiterConfiguration
+  , config: IRateLimiterConfig
   , options?: IGeyserClientRequestOptions
   ): Promise<void>
 
@@ -64,6 +64,9 @@ class GeyserClient {
   /**
    * @throws {RateLimiterNotFound}
    */
-  acquireToken(rateLimiterId: string, options?: IGeyserClientRequestOptions): Promise<void>
+  acquireToken(
+    rateLimiterId: string
+  , options?: IGeyserClientRequestOptions
+  ): Promise<void>
 }
 ```

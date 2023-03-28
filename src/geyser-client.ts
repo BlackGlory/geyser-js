@@ -9,7 +9,7 @@ import { Falsy, JSONObject } from 'justypes'
 import { NotFound } from '@blackglory/http-status'
 import { CustomError } from '@blackglory/errors'
 
-export interface IRateLimiterConfiguration extends JSONObject {
+export interface IRateLimiterConfig extends JSONObject {
   duration: number | null
   limit: number | null
 }
@@ -49,7 +49,7 @@ export class GeyserClient {
   async getRateLimiter(
     rateLimiterId: string
   , options: IGeyserClientRequestOptions = {}
-  ): Promise<IRateLimiterConfiguration | null> {
+  ): Promise<IRateLimiterConfig | null> {
     const req = get(
       ...this.getCommonTransformers(options)
     , appendPathname(`/rate-limiters/${rateLimiterId}`)
@@ -58,7 +58,7 @@ export class GeyserClient {
     try {
       return await fetch(req)
         .then(ok)
-        .then(toJSON) as IRateLimiterConfiguration
+        .then(toJSON) as IRateLimiterConfig
     } catch (e) {
       if (e instanceof NotFound) return null
 
@@ -68,7 +68,7 @@ export class GeyserClient {
 
   async setRateLimiter(
     rateLimiterId: string
-  , config: IRateLimiterConfiguration
+  , config: IRateLimiterConfig
   , options: IGeyserClientRequestOptions = {}
   ): Promise<void> {
     const req = put(
