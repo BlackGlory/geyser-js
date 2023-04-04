@@ -1,0 +1,16 @@
+version: '3.8'
+
+services:
+  test:
+    build:
+      dockerfile: Dockerfile.test
+      context: .
+      args:
+        - 'HTTP_PROXY'
+        - 'HTTPS_PROXY'
+    depends_on:
+      - geyser
+    command: test
+
+  geyser:
+    image: 'blackglory/geyser:0.5.0'

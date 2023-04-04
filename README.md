@@ -16,57 +16,42 @@ interface IRateLimiterConfig extends JSONObject {
 
 interface IGeyserClientOptions {
   server: string
-  basicAuth?: {
-    username: string
-    password: string
-  }
-  keepalive?: boolean
   timeout?: number
+  retryIntervalForReconnection?: number
 }
-
-interface IGeyserClientRequestOptions {
-  signal?: AbortSignal
-  keepalive?: boolean
-  timeout?: number | false
-}
-
-class RateLimiterNotFound extends CustomError {}
 
 class GeyserClient {
-  constructor(options: IGeyserClientOptions)
+  static create(options: IGeyserClientOptions): Promise<GeyserClient>
 
-  getAllRateLimiterIds(options?: IGeyserClientRequestOptions): Promise<string[]>
+  close(): Promise<void>
 
-  getRateLimiter(
-    rateLimiterId: string
-  , options?: IGeyserClientRequestOptions
-  ): Promise<IRateLimiterConfig | null>
+  getAllRateLimiterIds(timeout?: number): Promise<string[]>
+
+  getRateLimiter(rateLimiterId: string, timeout?: number): Promise<IRateLimiterConfig | null>
 
   setRateLimiter(
     rateLimiterId: string
   , config: IRateLimiterConfig
-  , options?: IGeyserClientRequestOptions
+  , timeout?: number
   ): Promise<void>
 
-  removeRateLimiter(
-    rateLimiterId: string
-  , options?: IGeyserClientRequestOptions
-  ): Promise<void>
+  removeRateLimiter(rateLimiterId: string, timeout?: number): Promise<void>
+
+  /**
+   * 重置速率限制器的状态.
+   * 
+   * @throws {RateLimiterNotFound}
+   */
+  resetRateLimiter(rateLimiterId: string, timeout?: number): Promise<void>
 
   /**
    * @throws {RateLimiterNotFound}
    */
-  resetRateLimiter(
-    rateLimiterId: string
-  , options?: IGeyserClientRequestOptions
-  ): Promise<void>
-
-  /**
-   * @throws {RateLimiterNotFound}
-   */
-  acquireToken(
-    rateLimiterId: string
-  , options?: IGeyserClientRequestOptions
-  ): Promise<void>
+  acquireToken(rateLimiterId: string, timeout?: number): Promise<void>
 }
+
+/**
+ * 速率限制器在未经配置的情况下, 相当于不存在.
+ */
+class RateLimiterNotFound extends CustomError {}
 ```
