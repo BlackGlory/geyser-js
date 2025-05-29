@@ -25,29 +25,32 @@ class GeyserClient {
 
   close(): Promise<void>
 
-  getAllRateLimiterIds(timeout?: number): Promise<string[]>
+  getAllRateLimiterIds(signal?: AbortSignal): Promise<string[]>
 
-  getRateLimiter(rateLimiterId: string, timeout?: number): Promise<IRateLimiterConfig | null>
+  getRateLimiter(
+    rateLimiterId: string
+  , signal?: AbortSignal
+  ): Promise<IRateLimiterConfig | null>
 
   setRateLimiter(
     rateLimiterId: string
   , config: IRateLimiterConfig
-  , timeout?: number
+  , signal?: AbortSignal
   ): Promise<void>
 
-  removeRateLimiter(rateLimiterId: string, timeout?: number): Promise<void>
+  removeRateLimiter(rateLimiterId: string, signal?: AbortSignal): Promise<void>
 
   /**
    * 重置速率限制器的状态.
    * 
    * @throws {RateLimiterNotFound}
    */
-  resetRateLimiter(rateLimiterId: string, timeout?: number): Promise<void>
+  resetRateLimiter(rateLimiterId: string, signal?: AbortSignal): Promise<void>
 
   /**
    * @throws {RateLimiterNotFound}
    */
-  acquireToken(rateLimiterId: string, timeout?: number): Promise<void>
+  acquireToken(rateLimiterId: string, signal?: AbortSignal): Promise<void>
 }
 
 /**
