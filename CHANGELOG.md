@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.10.0](https://github.com/BlackGlory/geyser-js/compare/v0.9.1...v0.10.0) (2025-05-29)
+
+
+### ⚠ BREAKING CHANGES
+
+* Replaced `timeout: number` with `signal: AbortSignal`
+* Node.js v16 => Node.js v22
+
+### Features
+
+* replace `timeout: number` with `signal: AbortSignal` ([f8e4ebe](https://github.com/BlackGlory/geyser-js/commit/f8e4ebe01b9838b402b8af95f81b1c5c38dc1f09))
+
+
+* upgrade dependencies ([3d590c0](https://github.com/BlackGlory/geyser-js/commit/3d590c071ecf2b357256b7ccc71b8b3e6f9e5a8d))
+
 ### [0.9.1](https://github.com/BlackGlory/geyser-js/compare/v0.9.0...v0.9.1) (2023-06-11)
 
 
