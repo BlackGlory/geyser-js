@@ -1,3 +1,4 @@
+import { describe, test } from 'vitest'
 import { GeyserClient } from '@src/geyser-client.js'
 
 const server = 'ws://geyser:8080'
