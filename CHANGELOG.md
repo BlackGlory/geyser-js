@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.10.1](https://github.com/BlackGlory/geyser-js/compare/v0.10.0...v0.10.1) (2025-07-22)
+
+
+### Features
+
+* make the timeout apply to connect and reconnect ([9ec0029](https://github.com/BlackGlory/geyser-js/commit/9ec00295675dff8ae66d641539ab0e56165e297c))
+
 ## [0.10.0](https://github.com/BlackGlory/geyser-js/compare/v0.9.1...v0.10.0) (2025-05-29)
 
 
