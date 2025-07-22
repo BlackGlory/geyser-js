@@ -16,6 +16,7 @@ export class GeyserClient {
     const { client, close } = await createRPCClient(
       options.server
     , options.retryIntervalForReconnection
+    , options.timeout
     )
     return new GeyserClient(client, close, options.timeout)
   }
