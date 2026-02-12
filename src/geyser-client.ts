@@ -73,7 +73,7 @@ export class GeyserClient {
     rateLimiterId: string
   , signal?: AbortSignal
   ): Promise<void> {
-    await this.client.removeRateLimiter(rateLimiterId, this.withTimeout(signal))
+    await this.client.resetRateLimiter(rateLimiterId, this.withTimeout(signal))
   }
 
   /**
