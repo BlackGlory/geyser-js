@@ -1,14 +1,18 @@
 import { createRPCClient } from '@utils/rpc-client.js'
 import { ClientProxy } from 'delight-rpc'
-import { raceAbortSignals, timeoutSignal } from 'extra-abort'
+import { isAbortSignal, raceAbortSignals, timeoutSignal } from 'extra-abort'
 import { IAPI, IRateLimiterConfig } from './contract.js'
-import { isntUndefined } from '@blackglory/prelude'
 export { IRateLimiterConfig, RateLimiterNotFound } from './contract.js'
 
 export interface IGeyserClientOptions {
   server: string
   timeout?: number
   retryIntervalForReconnection?: number
+}
+
+export interface IGeyserClientRequestOptions {
+  signal?: AbortSignal
+  timeout?: number | false
 }
 
 export class GeyserClient {
@@ -31,37 +35,44 @@ export class GeyserClient {
     await this.closeClients()
   }
 
-  async getAllRateLimiterIds(signal?: AbortSignal): Promise<string[]> {
-    return await this.client.getAllRateLimiterIds(this.withTimeout(signal))
+  async getAllRateLimiterIds(
+    signalOrOptions?: AbortSignal | IGeyserClientRequestOptions
+  ): Promise<string[]> {
+    return await this.client.getAllRateLimiterIds(
+      this.createSignal(signalOrOptions)
+    )
   }
 
   async getRateLimiter(
     rateLimiterId: string
-  , signal?: AbortSignal
+  , signalOrOptions?: AbortSignal | IGeyserClientRequestOptions
   ): Promise<IRateLimiterConfig | null> {
     return await this.client.getRateLimiter(
       rateLimiterId
-    , this.withTimeout(signal)
+    , this.createSignal(signalOrOptions)
     )
   }
 
   async setRateLimiter(
     rateLimiterId: string
   , config: IRateLimiterConfig
-  , signal?: AbortSignal
+  , signalOrOptions?: AbortSignal | IGeyserClientRequestOptions
   ): Promise<void> {
     await this.client.setRateLimiter(
       rateLimiterId
     , config
-    , this.withTimeout(signal)
+    , this.createSignal(signalOrOptions)
     )
   }
 
   async removeRateLimiter(
     rateLimiterId: string
-  , signal?: AbortSignal
+  , signalOrOptions?: AbortSignal | IGeyserClientRequestOptions
   ): Promise<void> {
-    await this.client.removeRateLimiter(rateLimiterId, this.withTimeout(signal))
+    await this.client.removeRateLimiter(
+      rateLimiterId
+    , this.createSignal(signalOrOptions)
+    )
   }
 
   /**
@@ -71,22 +82,40 @@ export class GeyserClient {
    */
   async resetRateLimiter(
     rateLimiterId: string
-  , signal?: AbortSignal
+  , signalOrOptions?: AbortSignal | IGeyserClientRequestOptions
   ): Promise<void> {
-    await this.client.resetRateLimiter(rateLimiterId, this.withTimeout(signal))
+    await this.client.resetRateLimiter(
+      rateLimiterId
+    , this.createSignal(signalOrOptions)
+    )
   }
 
   /**
    * @throws {RateLimiterNotFound}
    */
-  async acquireToken(rateLimiterId: string, signal?: AbortSignal): Promise<void> {
-    await this.client.acquireToken(rateLimiterId, this.withTimeout(signal))
+  async acquireToken(
+    rateLimiterId: string
+  , signalOrOptions?: AbortSignal | IGeyserClientRequestOptions
+  ): Promise<void> {
+    await this.client.acquireToken(
+      rateLimiterId
+    , this.createSignal(signalOrOptions)
+    )
   }
 
-  private withTimeout(signal?: AbortSignal): AbortSignal {
+  private createSignal(
+    signalOrOptions: AbortSignal | IGeyserClientRequestOptions = {}
+  ): AbortSignal {
+    const options: IGeyserClientRequestOptions = isAbortSignal(signalOrOptions)
+                                               ? { signal: signalOrOptions }
+                                               : signalOrOptions
+
     return raceAbortSignals([
-      isntUndefined(this.timeout) && timeoutSignal(this.timeout)
-    , signal
+      options.signal
+    , options.timeout !== false && (
+        (options.timeout && timeoutSignal(options.timeout)) ??
+        (this.timeout && timeoutSignal(this.timeout))
+      )
     ])
   }
 }

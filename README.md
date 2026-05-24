@@ -20,37 +20,53 @@ interface IGeyserClientOptions {
   retryIntervalForReconnection?: number
 }
 
+interface IGeyserClientRequestOptions {
+  signal?: AbortSignal
+  timeout?: number | false
+}
+
 class GeyserClient {
   static create(options: IGeyserClientOptions): Promise<GeyserClient>
 
   close(): Promise<void>
 
-  getAllRateLimiterIds(signal?: AbortSignal): Promise<string[]>
+  getAllRateLimiterIds(
+    signalOrOptions?: AbortSignal | IGeyserClientRequestOptions
+  ): Promise<string[]>
 
   getRateLimiter(
     rateLimiterId: string
-  , signal?: AbortSignal
+  , signalOrOptions?: AbortSignal | IGeyserClientRequestOptions
   ): Promise<IRateLimiterConfig | null>
 
   setRateLimiter(
     rateLimiterId: string
   , config: IRateLimiterConfig
-  , signal?: AbortSignal
+  , signalOrOptions?: AbortSignal | IGeyserClientRequestOptions
   ): Promise<void>
 
-  removeRateLimiter(rateLimiterId: string, signal?: AbortSignal): Promise<void>
+  removeRateLimiter(
+    rateLimiterId: string
+  , signalOrOptions?: AbortSignal | IGeyserClientRequestOptions
+  ): Promise<void>
 
   /**
    * 重置速率限制器的状态.
    * 
    * @throws {RateLimiterNotFound}
    */
-  resetRateLimiter(rateLimiterId: string, signal?: AbortSignal): Promise<void>
+  resetRateLimiter(
+    rateLimiterId: string
+  , signalOrOptions?: AbortSignal | IGeyserClientRequestOptions
+  ): Promise<void>
 
   /**
    * @throws {RateLimiterNotFound}
    */
-  acquireToken(rateLimiterId: string, signal?: AbortSignal): Promise<void>
+  acquireToken(
+    rateLimiterId: string
+  , signalOrOptions?: AbortSignal | IGeyserClientRequestOptions
+  ): Promise<void>
 }
 
 /**
