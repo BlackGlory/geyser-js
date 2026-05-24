@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.10.3](https://github.com/BlackGlory/geyser-js/compare/v0.10.2...v0.10.3) (2026-05-24)
+
+
+### Features
+
+* add support for `IGeyserClientRequestOptions` ([166b41e](https://github.com/BlackGlory/geyser-js/commit/166b41e66105a51dd645ba73bc09cf24bbae0040))
+
 ### [0.10.2](https://github.com/BlackGlory/geyser-js/compare/v0.10.1...v0.10.2) (2026-02-12)
 
 
