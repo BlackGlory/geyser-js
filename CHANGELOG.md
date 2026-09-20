@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.10.5](https://github.com/BlackGlory/geyser-js/compare/v0.10.4...v0.10.5) (2026-09-20)
+
+
+### Features
+
+* add `IGeyserClientOptions.basicAuth` ([bc1692a](https://github.com/BlackGlory/geyser-js/commit/bc1692a0e66de1b62f9cdf7f23f201860acfd0e7))
+
 ### [0.10.4](https://github.com/BlackGlory/geyser-js/compare/v0.10.3...v0.10.4) (2026-05-24)
 
 ### [0.10.3](https://github.com/BlackGlory/geyser-js/compare/v0.10.2...v0.10.3) (2026-05-24)
