@@ -1,11 +1,16 @@
 import { createRPCClient } from '@utils/rpc-client.js'
 import { ClientProxy } from 'delight-rpc'
 import { isAbortSignal, raceAbortSignals, timeoutSignal } from 'extra-abort'
-import { IAPI, IRateLimiterConfig } from './contract.js'
+import { expectedVersion, IAPI, IRateLimiterConfig } from './contract.js'
 export { IRateLimiterConfig, RateLimiterNotFound } from './contract.js'
 
 export interface IGeyserClientOptions {
   server: string
+
+  basicAuth?: {
+    username: string
+    password: string
+  }
   timeout?: number
   retryIntervalForReconnection?: number
 }
@@ -17,11 +22,14 @@ export interface IGeyserClientRequestOptions {
 
 export class GeyserClient {
   static async create(options: IGeyserClientOptions): Promise<GeyserClient> {
-    const { client, close } = await createRPCClient(
-      options.server
-    , options.retryIntervalForReconnection
-    , options.timeout
-    )
+    const { client, close } = await createRPCClient<IAPI>({
+      url: options.server
+    , retryIntervalForReconnection: options.retryIntervalForReconnection
+    , timeoutForConnection: options.timeout
+    , basicAuth: options.basicAuth
+    , expectedVersion
+    })
+
     return new GeyserClient(client, close, options.timeout)
   }
 
